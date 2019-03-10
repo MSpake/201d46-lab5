@@ -8,10 +8,18 @@ Write a function called sum() that takes in two numbers as arguments and then re
 Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testSum() function below and check the console to see if the test passes.*/
 
 // Write your code here
+
+//function sum() takes two parameters
+//sums the values passed into the parameters
+//returns an array containing the sum and a string explanation
 function sum(a, b) { //eslint-disable-line
-  var total = a + b;
-  var plain_english = 'The sum of ' + a + ' and ' + b + ' is ' + total + '.';
-  return [total, plain_english];
+  var sum_total = a + b;
+  var plain_english = 'The sum of ' + a + ' and ' + b + ' is ' + sum_total + '.';
+
+  //print the two values and their sum to the console
+  console.log('Added: ' + a + ' + ' + b + ' = ' + sum_total);
+
+  return [sum_total, plain_english];
 }
 
 // Here is the test for sum(); uncomment it to run it
@@ -28,9 +36,17 @@ Write a function called multiply() that takes in two numbers as arguments and re
 Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testMultiply() function and see if the test passes.*/
 
 // Write your code here
+
+//function multiply() takes two parameters
+//multiplies the values passed into the parameters
+//returns an array containing the product and a string explanation
 function multiply(a, b) { //eslint-disable-line
   var multipilcation_total = a * b;
   var say_it_with_words = 'The product of ' + a + ' and ' + b + ' is ' + multipilcation_total + '.';
+
+  //print the two values and thier product to the console
+  console.log('Multipied: ' + a + ' * ' + b + ' = ' + multipilcation_total);
+
   return [multipilcation_total, say_it_with_words];
 }
 
@@ -51,13 +67,27 @@ IMPORTANT DETAIL: You may not use the arithmetic operators + and * in this funct
 Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testSumAndMultiply() function and see if the test passes.*/
 
 // Write your code here
+
+//function sumAndMyltiply() takes three parameters
+//sums all three values using the sum() function
+//multiplies all three values using the multiply() function
+//returns an array containing 4 elements:
+//the sum, the product, a string explanation of the sum, and a string explanation of the product
 function sumAndMultiply(a, b, c) { //eslint-disable-line
   var sum_step_one = sum(a, b);
   var sum_total = sum(sum_step_one[0], c);
+  var sum_string = a + ' and ' + b + ' and ' + c + ' sum to ' + sum_total[0] + '.';
+
+  //print the string explanation of the sum to the console
+  console.log(sum_string);
+
   var multiply_step_one = multiply(a, b);
   var multiplication_total = multiply(multiply_step_one[0], c);
-  var sum_string = a + ' and ' + b + ' and ' + c + ' sum to ' + sum_total[0] + '.';
   var multiplication_string = 'The product of ' + a + ' and ' + b + ' and ' + c + ' is ' + multiplication_total[0] + '.';
+
+  //print the string explanations of the product to the console
+  console.log(multiplication_string);
+
   return [sum_total[0], multiplication_total[0], sum_string, multiplication_string];
 }
 
@@ -77,12 +107,20 @@ IMPORTANT DETAIL: You may not use the arithmetic operator + in this function. To
 Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testSumArray() function and see if the test passes.*/
 
 // Write your code here
+
 var testArray = [2, 3, 4]; //eslint-disable-line
 
+//function sumArray() takes a single parameter (a three element array)
+//sums all three elements using the sum() function
+//returns an arrray containing the sum and a string explanation
 function sumArray(sumArr) { //eslint-disable-line
   var sum_the_first_two_elements = sum(sumArr[0], sumArr[1]);
   var array_sum_total = sum(sum_the_first_two_elements[0], sumArr[2]);
   var arrray_string = sumArr + ' was passed in as an array of numbers, and ' + array_sum_total[0] + ' is their sum.';
+
+  //print the string explanation of the array sum to the console
+  console.log(arrray_string);
+
   return [array_sum_total[0], arrray_string];
 }
 
@@ -103,10 +141,18 @@ IMPORTANT DETAIL: You may not use the arithmetic operator * in this function. To
 Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testMultiplyArray() function and see if the test passes.*/
 
 // Write your code here
+
+//function multArr() takes a single parameter (a three element array)
+//multiplies all three elements using the multiply() function
+//returns an arrray containing the product and a string explanation
 function multiplyArray(multArr) { //eslint-disable-line
   var multiply_first_two_elements = multiply(multArr[0], multArr[1]);
   var multiplication_total = multiply(multiply_first_two_elements[0], multArr[2]);
   var arrray_string_multiplication = 'The numbers ' + multArr + ' have a product of ' + multiplication_total[0] + '.';
+
+  //print the string explanation of the array product to the console
+  console.log(arrray_string_multiplication);
+
   return [multiplication_total[0], arrray_string_multiplication];
 }
 
@@ -132,18 +178,31 @@ This function should be dynamic, accepting an array of any length.
 Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testMultiplyAnyArray() function and see if the test passes.*/
 
 // Write your code here
+
 var testDynamicArray = [1, 2, 3, 4, 5]; //eslint-disable-line
 
+
+//function multiplyAnyArray() takes a single parameter (an array of any length)
+//multiplies all elements using the multiply() function
+//returns an arrray containing the product and a string explanation
 function multiplyAnyArray(dynamicArray) { //eslint-disable-line
+
+  //starts total at 1 so that the first round of multiplication works correctly
   var total = 1;
+
+  //iterates through the array, multiplying all elements
   for (var i = 0; i < dynamicArray.length; i++) {
-    var step = multiply(total, dynamicArray[i]);
-    if (i === 0) {
-      total = 0;
-    }
-    total = step[0];
+    //holds the current step of the multiplication process
+    //returned value of multiply() is an array
+    var current_step = multiply(total, dynamicArray[i]);
+    //updates the total based on the current step in the multiplication process
+    total = current_step[0];
   }
   var dynamic_string = 'The numbers ' + dynamicArray + ' have a product of ' + total + '.';
+
+  //print the string explanation of the array product to the console
+  console.log(dynamic_string);
+
   return [total, dynamic_string];
 }
 
